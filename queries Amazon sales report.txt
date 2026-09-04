@@ -1,0 +1,187 @@
+Amazon Sales Report=# CREATE TABLE amazon_sales_report("Index" SERIAL PRIMARY KEY, "Order ID" VARCHAR(50), "Date" DATE,
+ "Status" VARCHAR(100), "Fulfilment" VARCHAR(50), "Sales Channel" VARCHAR(100), "ship-service-level" VARCHAR(50), "Styl
+e" VARCHAR(50), "SKU" VARCHAR(50), "Category" VARCHAR(50), "Size" VARCHAR(50), "ASIN" VARCHAR(50), "Courier Status" VAR
+CHAR(100), "qty" VARCHAR(50), "currency" VARCHAR(50), "Amount" VARCHAR(50), "ship-city" VARCHAR(50), "ship-state" VARCH
+AR(50), "ship-postal-code" VARCHAR(50), "ship-country" VARCHAR(50), "promotion-ids" VARCHAR(50), "B2B" VARCHAR(50), "fu
+lfilled-by" VARCHAR(100), "Unnamed :22" VARCHAR(10));
+CREATE TABLE
+Amazon Sales Report=# \d amazon_sales_report
+                                            Table "public.amazon_sales_report"
+       Column       |          Type          | Collation | Nullable |                       Default
+
+--------------------+------------------------+-----------+----------+--------------------------------------------------
+----
+ Index              | integer                |           | not null | nextval('"amazon_sales_report_Index_seq"'::regcla
+ss)
+ Order ID           | character varying(50)  |           |          |
+ Date               | date                   |           |          |
+ Status             | character varying(100) |           |          |
+ Fulfilment         | character varying(50)  |           |          |
+ Sales Channel      | character varying(100) |           |          |
+ ship-service-level | character varying(50)  |           |          |
+ Style              | character varying(50)  |           |          |
+ SKU                | character varying(50)  |           |          |
+ Category           | character varying(50)  |           |          |
+ Size               | character varying(50)  |           |          |
+ ASIN               | character varying(50)  |           |          |
+ Courier Status     | character varying(100) |           |          |
+ qty                | character varying(50)  |           |          |
+ currency           | character varying(50)  |           |          |
+ Amount             | character varying(50)  |           |          |
+ ship-city          | character varying(50)  |           |          |
+ ship-state         | character varying(50)  |           |          |
+ ship-postal-code   | character varying(50)  |           |          |
+ ship-country       | character varying(50)  |           |          |
+ promotion-ids      | character varying(50)  |           |          |
+ B2B                | character varying(50)  |           |          |
+ fulfilled-by       | character varying(100) |           |          |
+ Unnamed :22        | character varying(10)  |           |          |
+Indexes:
+    "amazon_sales_report_pkey" PRIMARY KEY, btree ("Index")
+
+
+Amazon Sales Report=# \copy amazon_sales_report ("Index", "Order ID", "Date", "Status", "Fulfilment", "Sales Channel",
+"ship-service-level", "Style", "SKU", "Category", "Size", "ASIN", "Courier Status", "qty", "currency", "Amount", "ship-
+city", "ship-state", "ship-postal-code", "ship-country", "promotion-ids", "B2B", "fulfilled-by", "Unnamed :22") FROM 'C
+:\Users\mmack\dataAn\Amazon_Sale_Report' DELIMITER ',' CSV HEADER;
+C:/Users/mmack/dataAn/Amazon_Sale_Report: No such file or directory
+Amazon Sales Report=# \copy amazon_sales_report ("Index", "Order ID", "Date", "Status", "Fulfilment", "Sales Channel","
+ship-service-level", "Style", "SKU", "Category", "Size", "ASIN", "Courier Status", "qty", "currency", "Amount", "ship-c
+ity", "ship-state", "ship-postal-code", "ship-country", "promotion-ids", "B2B", "fulfilled-by", "Unnamed :22") FROM 'C:
+\Users\mmack\dataAn\Amazon_Sale_Report.csv' DELIMITER ',' CSV HEADER;
+ERROR:  valor de hora/fecha fuera de rango: «04-30-22»
+HINT:  Perhaps you need a different "DateStyle" setting.
+CONTEXT:  COPY amazon_sales_report, línea 2, columna Date: «04-30-22»
+Amazon Sales Report=# ALTER TABLE amazon_sales_report ALTER COLUMN "Date" TYPE VARCHAR(50);
+ALTER TABLE
+Amazon Sales Report=# \copy amazon_sales_report ("Index", "Order ID", "Date", "Status", "Fulfilment", "Sales Channel","
+ship-service-level", "Style", "SKU", "Category", "Size", "ASIN", "Courier Status", "qty", "currency", "Amount", "ship-c
+ity", "ship-state", "ship-postal-code", "ship-country", "promotion-ids", "B2B", "fulfilled-by", "Unnamed :22") FROM 'C:
+\Users\mmack\dataAn\Amazon_Sale_Report.csv' DELIMITER ',' CSV HEADER;
+ERROR:  el valor es demasiado largo para el tipo character varying(50)
+CONTEXT:  COPY amazon_sales_report, línea 3, columna promotion-ids: «Amazon PLCC Free-Financing Universal Merchant AAT-
+WNKTBO3K27EJC,Amazon PLCC Free-Financing Universal...»
+Amazon Sales Report=# ALTER TABLE amazon_sales_report ALTER COLUMN "promotion-ids" TYPE VARCHAR(100);
+ALTER TABLE
+Amazon Sales Report=#  \copy amazon_sales_report ("Index", "Order ID", "Date", "Status", "Fulfilment", "Sales Channel",
+"ship-service-level", "Style", "SKU", "Category", "Size", "ASIN", "Courier Status", "qty", "currency", "Amount", "ship-
+city", "ship-state", "ship-postal-code", "ship-country", "promotion-ids", "B2B", "fulfilled-by", "Unnamed :22") FROM 'C
+:\Users\mmack\dataAn\Amazon_Sale_Report.csv' DELIMITER ',' CSV HEADER;
+ERROR:  el valor es demasiado largo para el tipo character varying(100)
+CONTEXT:  COPY amazon_sales_report, línea 3, columna promotion-ids: «Amazon PLCC Free-Financing Universal Merchant AAT-
+WNKTBO3K27EJC,Amazon PLCC Free-Financing Universal...»
+Amazon Sales Report=# ALTER TABLE amazon_sales_report ALTER COLUMN "promotion-ids" TYPE VARCHAR(200);
+ALTER TABLE
+Amazon Sales Report=#  \copy amazon_sales_report ("Index", "Order ID", "Date", "Status", "Fulfilment", "Sales Channel",
+"ship-service-level", "Style", "SKU", "Category", "Size", "ASIN", "Courier Status", "qty", "currency", "Amount", "ship-
+city", "ship-state", "ship-postal-code", "ship-country", "promotion-ids", "B2B", "fulfilled-by", "Unnamed :22") FROM 'C
+:\Users\mmack\dataAn\Amazon_Sale_Report.csv' DELIMITER ',' CSV HEADER
+ERROR:  el valor es demasiado largo para el tipo character varying(200)
+CONTEXT:  COPY amazon_sales_report, línea 3, columna promotion-ids: «Amazon PLCC Free-Financing Universal Merchant AAT-
+WNKTBO3K27EJC,Amazon PLCC Free-Financing Universal...»
+Amazon Sales Report=#  \copy amazon_sales_report ("Index", "Order ID", "Date", "Status", "Fulfilment", "Sales Channel",
+"ship-service-level", "Style", "SKU", "Category", "Size", "ASIN", "Courier Status", "qty", "currency", "Amount", "ship-
+city", "ship-state", "ship-postal-code", "ship-country", "promotion-ids", "B2B", "fulfilled-by", "Unnamed :22") FROM 'C
+:\Users\mmack\dataAn\Amazon_Sale_Report.csv' DELIMITER ',' CSV HEADER;
+ERROR:  el valor es demasiado largo para el tipo character varying(200)
+CONTEXT:  COPY amazon_sales_report, línea 3, columna promotion-ids: «Amazon PLCC Free-Financing Universal Merchant AAT-
+WNKTBO3K27EJC,Amazon PLCC Free-Financing Universal...»
+Amazon Sales Report=# ALTER TABLE amazon_sales_report ALTER COLUMN "promotion-ids" TYPE VARCHAR(1000);
+ALTER TABLE
+Amazon Sales Report=#  \copy amazon_sales_report ("Index", "Order ID", "Date", "Status", "Fulfilment", "Sales Channel",
+"ship-service-level", "Style", "SKU", "Category", "Size", "ASIN", "Courier Status", "qty", "currency", "Amount", "ship-
+city", "ship-state", "ship-postal-code", "ship-country", "promotion-ids", "B2B", "fulfilled-by", "Unnamed :22") FROM 'C
+:\Users\mmack\dataAn\Amazon_Sale_Report.csv' DELIMITER ',' CSV HEADER;
+ERROR:  el valor es demasiado largo para el tipo character varying(1000)
+CONTEXT:  COPY amazon_sales_report, línea 3, columna promotion-ids: «Amazon PLCC Free-Financing Universal Merchant AAT-
+WNKTBO3K27EJC,Amazon PLCC Free-Financing Universal...»
+Amazon Sales Report=# ALTER TABLE amazon_sales_report ALTER COLUMN "promotion-ids" TYPE VARCHAR;
+ALTER TABLE
+Amazon Sales Report=#  \copy amazon_sales_report ("Index", "Order ID", "Date", "Status", "Fulfilment", "Sales Channel",
+"ship-service-level", "Style", "SKU", "Category", "Size", "ASIN", "Courier Status", "qty", "currency", "Amount", "ship-
+city", "ship-state", "ship-postal-code", "ship-country", "promotion-ids", "B2B", "fulfilled-by", "Unnamed :22") FROM 'C
+:\Users\mmack\dataAn\Amazon_Sale_Report.csv' DELIMITER ',' CSV HEADER;
+COPY 128975
+Amazon Sales Report=# SELECT TO_DATE("Date", 'MM-DD-YY') AS fecha_parseadaFROM amazon_sales_report LIMIT 5;
+ERROR:  error de sintaxis en o cerca de «amazon_sales_report»
+LINE 1: ...TO_DATE("Date", 'MM-DD-YY') AS fecha_parseadaFROM amazon_sal...
+                                                             ^
+Amazon Sales Report=# SELECT TO_DATE("Date", 'MM-DD-YY') AS fecha_parseada FROM amazon_sales_report LIMIT 5;
+ fecha_parseada
+----------------
+ 2022-04-30
+ 2022-04-30
+ 2022-04-30
+ 2022-04-30
+ 2022-04-30
+(5 rows)
+
+
+Amazon Sales Report=# SELECT "Status", COUNT(*) FROM amazon_sales_report GROUP BY "Status" ORDER BY COUNT(*) DESC;
+            Status             | count
+-------------------------------+-------
+ Shipped                       | 77804
+ Shipped - Delivered to Buyer  | 28769
+ Cancelled                     | 18332
+ Shipped - Returned to Seller  |  1953
+ Shipped - Picked Up           |   973
+ Pending                       |   658
+ Pending - Waiting for Pick Up |   281
+ Shipped - Returning to Seller |   145
+ Shipped - Out for Delivery    |    35
+ Shipped - Rejected by Buyer   |    11
+ Shipping                      |     8
+ Shipped - Lost in Transit     |     5
+ Shipped - Damaged             |     1
+(13 rows)
+
+
+Amazon Sales Report=# ALTER TABLE amazon_sales_report ADD COLUMN order_date DATE;
+ALTER TABLE
+Amazon Sales Report=# UPDATE amazon_sales_report SET order_date = TO_DATE("Date", 'MM-DD-YY');
+UPDATE 128975
+Amazon Sales Report=# SELECT     ROUND(100.0 * SUM(CASE WHEN "Status" = 'Cancelled' THEN 1 ELSE 0 END) / COUNT(*), 2) A
+S pct_canceladoFROM amazon_sales_report;
+ERROR:  error de sintaxis en o cerca de «amazon_sales_report»
+LINE 1: ...1 ELSE 0 END) / COUNT(*), 2) AS pct_canceladoFROM amazon_sal...
+                                                             ^
+Amazon Sales Report=# SELECT ROUND(100.0 * SUM(CASE WHEN "Status" = 'Cancelled' THEN 1 ELSE 0 END) / COUNT(*), 2) AS pc
+t_cancelado FROM amazon_sales_report;
+ pct_cancelado
+---------------
+         14.21
+(1 row)
+
+
+Amazon Sales Report=# SELECT     DATE_TRUNC('month', order_date) AS mes,    COUNT(*) FILTER (WHERE "Status" = 'Cancelle
+d') AS cancelados,    COUNT(*) AS total,    ROUND(100.0 * COUNT(*) FILTER (WHERE "Status" = 'Cancelled') / COUNT(*), 2)
+ AS pctFROM amazon_sales_reportGROUP BY mesORDER BY mes;
+ERROR:  error de sintaxis en o cerca de «amazon_sales_reportGROUP»
+LINE 1: ..."Status" = 'Cancelled') / COUNT(*), 2) AS pctFROM amazon_sal...
+                                                             ^
+Amazon Sales Report=# SELECT     DATE_TRUNC('month', order_date) AS mes,    COUNT(*) FILTER (WHERE "Status" = 'Cancelle
+d') AS cancelados,    COUNT(*) AS total,    ROUND(100.0 * COUNT(*) FILTER (WHERE "Status" = 'Cancelled') / COUNT(*), 2)
+ AS pct FROM amazon_sales_report GROUP BY mes ORDER BY mes;
+          mes           | cancelados | total |  pct
+------------------------+------------+-------+-------
+ 2022-03-01 00:00:00-03 |         18 |   171 | 10.53
+ 2022-04-01 00:00:00-03 |       7137 | 49067 | 14.55
+ 2022-05-01 00:00:00-03 |       5874 | 42040 | 13.97
+ 2022-06-01 00:00:00-03 |       5303 | 37697 | 14.07
+(4 rows)
+
+
+Amazon Sales Report=# SELECT "Category",     COUNT(*) FILTER (WHERE "Status" = 'Cancelled') AS cancelados,    COUNT(*)
+AS total FROM amazon_sales_report GROUP BY "Category" ORDER BY cancelados DESC;
+   Category    | cancelados | total
+---------------+------------+-------
+ Set           |       7337 | 50284
+ kurta         |       7255 | 49877
+ Western Dress |       2122 | 15500
+ Top           |       1276 | 10622
+ Ethnic Dress  |        145 |  1159
+ Blouse        |        116 |   926
+ Bottom        |         60 |   440
+ Saree         |         21 |   164
+ Dupatta       |          0 |     3
+(9 rows)
